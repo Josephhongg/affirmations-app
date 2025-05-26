@@ -1,0 +1,50 @@
+/* [project]/components/TextToSpeech.module.css [app-client] (css) */
+.TextToSpeech-module__MZPX2W__container {
+  background-color: #fafafa;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.TextToSpeech-module__MZPX2W__textbox {
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 40%;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.TextToSpeech-module__MZPX2W__button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #0070f3;
+  border: none;
+  border-radius: 6px;
+  padding: .75rem 1.5rem;
+  font-size: 1rem;
+}
+
+.TextToSpeech-module__MZPX2W__button:disabled {
+  cursor: not-allowed;
+  background-color: #aaa;
+}
+
+.TextToSpeech-module__MZPX2W__error {
+  color: red;
+  margin-top: .5rem;
+  font-size: .9rem;
+}
+
+.TextToSpeech-module__MZPX2W__audio {
+  margin-top: 2rem;
+}
+
+
+/* [project]/app/page.module.css [app-client] (css) */
+
+
+
+/*# sourceMappingURL=_0c12c3c0._.css.map*/

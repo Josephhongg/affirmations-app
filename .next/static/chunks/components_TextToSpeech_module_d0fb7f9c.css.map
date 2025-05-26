@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/josephhong/The%20Art%20of%20Optimism/affirmations-app/components/TextToSpeech.module.css"],"sourcesContent":[".container {\n  display: flex;\n  flex-direction: column;\n}"],"names":[],"mappings":"AAAA","debugId":null}}]
+}
