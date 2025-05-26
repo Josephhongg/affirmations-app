@@ -1,0 +1,18 @@
+.header {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+	margin: 10px;
+	padding: 10px;
+	gap: 8px;
+}
+
+.logo {
+	height: 45px;
+	width: 50px;
+}
+
+.title {
+    font-size: 27px;
+    font-weight: 600;
+}
