@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.textbox {
+  border: grey 1px solid;
+}

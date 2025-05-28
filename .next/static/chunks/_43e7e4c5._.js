@@ -6,6 +6,7 @@ var { g: global, __dirname } = __turbopack_context__;
 {
 __turbopack_context__.v({
   "container": "TextToSpeech-module__MZPX2W__container",
+  "textbox": "TextToSpeech-module__MZPX2W__textbox",
 });
 }}),
 "[project]/components/TextToSpeech.jsx [app-client] (ecmascript)": ((__turbopack_context__) => {
@@ -26,22 +27,22 @@ var _s = __turbopack_context__.k.signature();
 ;
 function TextToSpeech() {
     _s();
-    // State for the text input
+    // State to hold the user's input text
     const [text, setText] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
-    // State to indicate loading status
+    // State to indicate if the request is loading
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
-    // State to store error messages
+    // State to hold any error messages
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     // Ref to access the audio element directly
     const audioRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
-    // Handles the Play button click event
+    // Handles the play button click event
     const handlePlay = async ()=>{
-        // If input is empty, show error and exit
+        // If input is empty, show error and return
         if (!text.trim()) {
             setError("Please enter an affirmation.");
             return;
         }
-        setLoading(true); // Show loading state
+        setLoading(true); // Set loading state
         setError(""); // Clear previous errors
         try {
             // Send POST request to API with the input text
@@ -54,6 +55,7 @@ function TextToSpeech() {
                     text
                 })
             });
+            console.log(res);
             // If response is not OK, extract and throw error
             if (!res.ok) {
                 const { error } = await res.json().catch(()=>({
@@ -61,16 +63,18 @@ function TextToSpeech() {
                     }));
                 throw new Error(error);
             }
-            // Get audio data as a Blob and create a URL for it
+            // Get audio data from response as a Blob
             const audioBlob = await res.blob();
+            // Create a URL for the audio Blob
             const audioUrl = URL.createObjectURL(audioBlob);
-            // Set the audio element's source and play the audio
+            // If audio element exists, set its source and play
             if (audioRef.current) {
                 audioRef.current.src = audioUrl;
                 audioRef.current.play();
             }
-            setText(""); // Clear the textbox after playing
+            setText(""); // Clear the input text after playing
         } catch (err) {
+            // Log and display any errors
             console.error("Playback error:", err);
             setError(err.message || "Something went wrong.");
         } finally{
@@ -80,47 +84,63 @@ function TextToSpeech() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TextToSpeech$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].container,
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
-                className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TextToSpeech$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].textbox,
-                placeholder: "Type your affirmation here...",
-                value: text,
-                onChange: (e)=>setText(e.target.value)
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
+                    className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TextToSpeech$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].textbox,
+                    placeholder: "Type your affirmation here...",
+                    value: text,
+                    onChange: (e)=>setText(e.target.value),
+                    rows: 5,
+                    cols: 50
+                }, void 0, false, {
+                    fileName: "[project]/components/TextToSpeech.jsx",
+                    lineNumber: 70,
+                    columnNumber: 5
+                }, this)
             }, void 0, false, {
                 fileName: "[project]/components/TextToSpeech.jsx",
-                lineNumber: 65,
+                lineNumber: 68,
                 columnNumber: 4
             }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TextToSpeech$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].button,
-                onClick: handlePlay,
-                disabled: loading,
-                children: loading ? "Loading..." : "Play Voice"
-            }, void 0, false, {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TextToSpeech$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].button,
+                        onClick: handlePlay,
+                        disabled: loading,
+                        children: loading ? "Loading..." : "Play Voice"
+                    }, void 0, false, {
+                        fileName: "[project]/components/TextToSpeech.jsx",
+                        lineNumber: 82,
+                        columnNumber: 5
+                    }, this),
+                    error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TextToSpeech$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].error,
+                        children: error
+                    }, void 0, false, {
+                        fileName: "[project]/components/TextToSpeech.jsx",
+                        lineNumber: 90,
+                        columnNumber: 15
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("audio", {
+                        ref: audioRef,
+                        className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TextToSpeech$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].audio,
+                        controls: true
+                    }, void 0, false, {
+                        fileName: "[project]/components/TextToSpeech.jsx",
+                        lineNumber: 92,
+                        columnNumber: 5
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/TextToSpeech.jsx",
-                lineNumber: 72,
-                columnNumber: 4
-            }, this),
-            error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TextToSpeech$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].error,
-                children: error
-            }, void 0, false, {
-                fileName: "[project]/components/TextToSpeech.jsx",
-                lineNumber: 76,
-                columnNumber: 14
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("audio", {
-                ref: audioRef,
-                className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$TextToSpeech$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].audio,
-                controls: true
-            }, void 0, false, {
-                fileName: "[project]/components/TextToSpeech.jsx",
-                lineNumber: 78,
+                lineNumber: 80,
                 columnNumber: 4
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/TextToSpeech.jsx",
-        lineNumber: 63,
+        lineNumber: 67,
         columnNumber: 3
     }, this);
 }

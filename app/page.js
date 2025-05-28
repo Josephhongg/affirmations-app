@@ -1,3 +1,11 @@
+import Header from "../components/Header"
+import TextToSpeech from "../components/TextToSpeech"
+
 export default function Page() {
-  return <h1>Hello, world</h1>
+  return (
+    <>
+    <Header />
+    <TextToSpeech />
+    </>
+  )
 }
