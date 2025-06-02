@@ -1,0 +1,36 @@
+.container {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  margin: auto;
+  padding: 40px 30px 40px;
+  border-radius: 10px;
+}
+.container h2 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  color: #002765;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.row textarea {
+ flex: 1;
+ border: 1px solid grey;
+}
+
+.row button {
+  margin-left: 20px;
+  padding: 16px 50px;
+	background: #ff5945;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 40px;
+}
